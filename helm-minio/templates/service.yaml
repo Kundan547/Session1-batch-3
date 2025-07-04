@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-service
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: minio
+  ports:
+    - name: s3
+      port: {{ .Values.minio.s3Port }}
+      targetPort: {{ .Values.minio.s3Port }}
+    - name: console
+      port: {{ .Values.minio.consolePort }}
+      targetPort: {{ .Values.minio.consolePort }}
+  type: NodePort

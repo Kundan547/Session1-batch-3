@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: minio
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: minio
+spec:
+  containers:
+    - name: minio
+      image: {{ .Values.minio.image }}
+      command:
+        - /bin/bash
+        - -c
+      args:
+        - minio server /data --console-address :{{ .Values.minio.consolePort }}
+      volumeMounts:
+        - name: localvolume
+          mountPath: /data
+  nodeSelector:
+    {{- toYaml .Values.minio.nodeSelector | nindent 4 }}
+  volumes:
+    - name: localvolume
+      hostPath:
+        path: {{ .Values.minio.volumePath }}
+        type: DirectoryOrCreate

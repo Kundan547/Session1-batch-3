@@ -1,0 +1,9 @@
+namespace: minio-dev
+
+minio:
+  image: quay.io/minio/minio:latest
+  nodeSelector: 
+    kubernetes.io/hostname: worker01
+  volumePath: /mnt/disk1/data
+  consolePort: 9090
+  s3Port: 9000

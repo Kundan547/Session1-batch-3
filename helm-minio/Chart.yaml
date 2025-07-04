@@ -1,0 +1,5 @@
+apiVersion: v2
+name: minio-chart
+description: A Helm chart to deploy MinIO
+version: 0.1.0
+appVersion: "latest"
